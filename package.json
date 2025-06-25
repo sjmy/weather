@@ -1,7 +1,7 @@
 {
-  "name": "webpack-template",
+  "name": "weather",
   "version": "1.0.0",
-  "description": "Webpack template for web dev",
+  "description": "Weather app project for The Odin Project",
   "main": "main.js",
   "scripts": {
     "test": "echo \\\"Error: no test specified\\\" && exit 1",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sjmy/webpack-template.git"
+    "url": "git+https://github.com/sjmy/weather.git"
   },
   "author": "sjmy",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/sjmy/webpack-template/issues"
+    "url": "https://github.com/sjmy/weather/issues"
   },
-  "homepage": "https://github.com/sjmy/webpack-template#readme",
+  "homepage": "https://github.com/sjmy/weather#readme",
   "devDependencies": {
     "@eslint/css": "^0.9.0",
     "@eslint/js": "^9.29.0",
