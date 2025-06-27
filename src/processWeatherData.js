@@ -1,3 +1,7 @@
+// Grab resolvedAddress
+// Parse data into days array with needed data points. Five days in the array.
+// days[n]: conditions, datetime (or datetimeEpoch), description, feelslike, humidity, icon (dynamicImport()?), temp, tempmax, tempmin
+// days[0] is today
 export default function processWeatherData() {
   function processData(weatherData) {
     const location = weatherData.resolvedAddress;
