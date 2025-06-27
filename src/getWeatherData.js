@@ -1,5 +1,3 @@
-import { processWeatherData } from "./processWeatherData.js";
-
 async function requestWeather(location) {
   try {
     const response = await fetch(
@@ -9,21 +7,16 @@ async function requestWeather(location) {
       },
     );
     const weatherData = await response.json();
-
-    console.log("getWeather():");
-    console.log(weatherData);
-    processWeatherData(weatherData);
+    return weatherData;
   } catch (err) {
-    console.error(err);
+    console.log(err);
   }
 }
 
 function getLocation() {
-  const searchValue = document.querySelector("#search").value;
-  return searchValue;
+  return document.querySelector("#search").value;
 }
 
 export function getWeather() {
-  const location = getLocation();
-  return requestWeather(location);
+  return requestWeather(getLocation());
 }
