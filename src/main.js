@@ -1,5 +1,5 @@
 import "./styles.css";
-import weatherAPIObject from "./getWeatherData.js";
+import { getWeather } from "./getWeatherData.js";
 
 // Weather app using Visual Crossing API
 // Get the current weather for a location, toggle between Celcius and Fahrenheit
@@ -9,9 +9,8 @@ import weatherAPIObject from "./getWeatherData.js";
 // API Key DZT5RXGHUH8KC87N2AGBG6S3Z
 
 const searchButton = document.querySelector("#search-button");
-const weatherAPI = weatherAPIObject();
 
 searchButton.addEventListener("click", () => {
-  weatherAPI.getWeather();
+  getWeather();
   console.log("loading...");
 });
