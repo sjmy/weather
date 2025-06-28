@@ -40,10 +40,5 @@ export function processWeather(weatherRaw) {
   const location = getResolvedLocation(weatherRaw);
   const sixDayArray = getSixDayArray(weatherRaw.days);
 
-  // console.log(`Location: ${location}`);
-  // console.log(`Current temp: ${fiveDayArray[0].tempC} C`);
-  // console.log(`Current conditions: ${fiveDayArray[0].conditions}`);
-  // console.log(`Current humidity: ${fiveDayArray[0].humidity}`);
-
   return { location, sixDayArray };
 }

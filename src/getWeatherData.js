@@ -13,7 +13,7 @@ async function requestRawWeather(location = "London") {
   }
 }
 
-export function getRawLocation() {
+function getRawLocation() {
   const rawLocation = document.querySelector("#search").value;
   if (rawLocation == "") {
     return "London";
