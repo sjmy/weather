@@ -17,7 +17,7 @@ async function reportWeather() {
   drawWeather(weather);
 }
 
-function startEventListeners() {
+function startSearchListeners() {
   const searchButton = document.querySelector("#search-button");
   const searchInput = document.querySelector("#search");
 
@@ -33,4 +33,4 @@ function startEventListeners() {
 }
 
 reportWeather();
-startEventListeners();
+startSearchListeners();

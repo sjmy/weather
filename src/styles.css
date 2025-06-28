@@ -58,15 +58,19 @@ body {
 
 .actualTemp {
   font-size: xx-large;
-}
-
-.celcius {
-  margin-left: 10px;
+  justify-self: center;
 }
 
 .celcius,
 .fahrenheit {
   cursor: pointer;
+  font-size: large;
+  color: grey;
+}
+
+.active {
+  font-size: inherit;
+  color: inherit;
 }
 
 .feelsLike {

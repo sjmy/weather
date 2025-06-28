@@ -43,12 +43,13 @@ function drawCurrentWeather(today) {
   actualTemp.classList.add("actualTemp");
   feelsLike.classList.add("feelsLike");
   celcius.classList.add("celcius");
+  celcius.classList.add("active");
   fahrenheit.classList.add("fahrenheit");
   divider.classList.add("divider");
   conditions.classList.add("description");
-  actualTemp.textContent = `${today.tempC}°`;
-  celcius.textContent = "C°";
-  fahrenheit.textContent = "F°";
+  actualTemp.textContent = `${today.tempC}`;
+  celcius.textContent = "°C";
+  fahrenheit.textContent = "°F";
   divider.textContent = "/";
   feelsLike.textContent = `Feels like: ${today.feelslikeC}°`;
   conditions.textContent = `${today.conditions}`;
@@ -61,6 +62,31 @@ function drawCurrentWeather(today) {
   currentConditionsDiv.appendChild(feelsLike);
   currentContainer.appendChild(iconDiv);
   currentContainer.appendChild(currentConditionsDiv);
+}
+
+function changeTempFormat(days) {
+  const actualTemp = document.querySelector(".actualTemp");
+  const feelsLike = document.querySelector(".feelsLike");
+  const highLowDivs = document.querySelectorAll(".highLowDiv");
+  const activeFormat = document.querySelector(".active");
+
+  if (activeFormat.classList.contains("celcius")) {
+    actualTemp.textContent = `${days[0].tempC}`;
+    feelsLike.textContent = `Feels like: ${days[0].feelslikeC}°`;
+
+    for (let d = 0; d < highLowDivs.length; d++) {
+      highLowDivs[d].textContent =
+        `${days[d + 1].tempmaxC}° / ${days[d + 1].tempminC}°`;
+    }
+  } else {
+    actualTemp.textContent = `${days[0].tempF}`;
+    feelsLike.textContent = `Feels like: ${days[0].feelslikeF}°`;
+
+    for (let d = 0; d < highLowDivs.length; d++) {
+      highLowDivs[d].textContent =
+        `${days[d + 1].tempmaxF}° / ${days[d + 1].tempminF}°`;
+    }
+  }
 }
 
 function drawFiveDayForecast(days) {
@@ -91,6 +117,27 @@ function drawFiveDayForecast(days) {
   }
 }
 
+function startCFListeners(days) {
+  const celcius = document.querySelector(".celcius");
+  const fahrenheit = document.querySelector(".fahrenheit");
+
+  celcius.addEventListener("click", () => {
+    if (!celcius.classList.contains("active")) {
+      celcius.classList.add("active");
+      fahrenheit.classList.remove("active");
+      changeTempFormat(days);
+    }
+  });
+
+  fahrenheit.addEventListener("click", () => {
+    if (!fahrenheit.classList.contains("active")) {
+      fahrenheit.classList.add("active");
+      celcius.classList.remove("active");
+      changeTempFormat(days);
+    }
+  });
+}
+
 export function drawLoading() {
   const currentContainer = document.querySelector(".current-container");
   currentContainer.textContent = "Loading ...";
@@ -101,4 +148,5 @@ export function drawWeather(weather) {
   drawLocation(weather.location);
   drawCurrentWeather(weather.sixDayArray[0]);
   drawFiveDayForecast(weather.sixDayArray);
+  startCFListeners(weather.sixDayArray);
 }
