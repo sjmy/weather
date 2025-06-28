@@ -1,6 +1,14 @@
+function clearContents() {
+  const currentContainer = document.querySelector(".current-container");
+  const titleContainer = document.querySelector(".title-container");
+
+  currentContainer.textContent = "";
+  titleContainer.textContent = "";
+}
+
 function drawLocation(location) {
   const currentContainer = document.querySelector(".current-container");
-  const titleContainer = document.createElement("div");
+  const titleContainer = document.querySelector(".title-container");
 
   titleContainer.textContent = location;
   currentContainer.before(titleContainer);
@@ -8,20 +16,38 @@ function drawLocation(location) {
 
 function drawCurrentWeather(today) {
   const currentContainer = document.querySelector(".current-container");
-  const iconDiv = document.createElement("div");
-  const tempDiv = document.createElement("div");
+  const iconDiv = document.createElement("img");
+  const currentConditionsDiv = document.createElement("div");
+  const actualTemp = document.createElement("div");
+  const feelsLike = document.createElement("div");
+  const conditions = document.createElement("div");
 
-  iconDiv.textContent = today.icon;
-  tempDiv.textContent = `${today.tempC}°C`;
+  import(`./icons/${today.icon}.svg`).then((icon) => {
+    iconDiv.src = icon.default;
+  });
+
+  iconDiv.classList.add("iconDiv");
+  currentConditionsDiv.classList.add("currentConditionsDiv");
+  actualTemp.classList.add("actualTemp");
+  feelsLike.classList.add("feelsLike");
+  conditions.classList.add("description");
+  actualTemp.textContent = `${today.tempC}°`;
+  feelsLike.textContent = `Feels like: ${today.feelslikeC}°`;
+  conditions.textContent = `${today.conditions}`;
+  currentConditionsDiv.appendChild(conditions);
+  currentConditionsDiv.appendChild(actualTemp);
+  currentConditionsDiv.appendChild(feelsLike);
   currentContainer.appendChild(iconDiv);
-  currentContainer.appendChild(tempDiv);
+  currentContainer.appendChild(currentConditionsDiv);
+}
+
+function drawCurrentWeatherDetails(today) {
+  const currentDetails = document.querySelector(".current-details");
 }
 
 export function drawWeather(weather) {
+  clearContents();
   drawLocation(weather.location);
   drawCurrentWeather(weather.sixDayArray[0]);
-  // console.log(`Location: ${location}`);
-  // console.log(`Current temp: ${fiveDayArray[0].tempC} C`);
-  // console.log(`Current conditions: ${fiveDayArray[0].conditions}`);
-  // console.log(`Current humidity: ${fiveDayArray[0].humidity}`);
+  drawCurrentWeatherDetails(weather.sixDayArray[0]);
 }
