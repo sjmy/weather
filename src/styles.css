@@ -49,8 +49,24 @@ body {
   width: 30%;
 }
 
+.tempDiv {
+  display: flex;
+  font-size: x-large;
+  align-items: center;
+  gap: 5px;
+}
+
 .actualTemp {
   font-size: xx-large;
+}
+
+.celcius {
+  margin-left: 10px;
+}
+
+.celcius,
+.fahrenheit {
+  cursor: pointer;
 }
 
 .feelsLike {

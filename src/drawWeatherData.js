@@ -25,7 +25,11 @@ function drawCurrentWeather(today) {
   const currentContainer = document.querySelector(".current-container");
   const iconDiv = document.createElement("img");
   const currentConditionsDiv = document.createElement("div");
+  const tempDiv = document.createElement("div");
   const actualTemp = document.createElement("div");
+  const celcius = document.createElement("div");
+  const fahrenheit = document.createElement("div");
+  const divider = document.createElement("div");
   const feelsLike = document.createElement("div");
   const conditions = document.createElement("div");
 
@@ -35,14 +39,25 @@ function drawCurrentWeather(today) {
 
   iconDiv.classList.add("iconDiv");
   currentConditionsDiv.classList.add("currentConditionsDiv");
+  tempDiv.classList.add("tempDiv");
   actualTemp.classList.add("actualTemp");
   feelsLike.classList.add("feelsLike");
+  celcius.classList.add("celcius");
+  fahrenheit.classList.add("fahrenheit");
+  divider.classList.add("divider");
   conditions.classList.add("description");
   actualTemp.textContent = `${today.tempC}°`;
+  celcius.textContent = "C°";
+  fahrenheit.textContent = "F°";
+  divider.textContent = "/";
   feelsLike.textContent = `Feels like: ${today.feelslikeC}°`;
   conditions.textContent = `${today.conditions}`;
+  tempDiv.appendChild(actualTemp);
+  tempDiv.appendChild(celcius);
+  tempDiv.appendChild(divider);
+  tempDiv.appendChild(fahrenheit);
   currentConditionsDiv.appendChild(conditions);
-  currentConditionsDiv.appendChild(actualTemp);
+  currentConditionsDiv.appendChild(tempDiv);
   currentConditionsDiv.appendChild(feelsLike);
   currentContainer.appendChild(iconDiv);
   currentContainer.appendChild(currentConditionsDiv);
