@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 function clearContents() {
   const currentContainer = document.querySelector(".current-container");
   const titleContainer = document.querySelector(".title-container");
@@ -50,19 +52,33 @@ function drawFiveDayForecast(days) {
   const dayDivs = document.querySelectorAll(".day");
 
   for (let d = 0; d < dayDivs.length; d++) {
-    const forecastIconDiv = document.createElement("img");
+    const dateDiv = document.createElement("div");
+    const forecastIcon = document.createElement("img");
     const highLowDiv = document.createElement("div");
 
     import(`./icons/${days[d + 1].icon}.svg`).then((icon) => {
-      forecastIconDiv.src = icon.default;
+      forecastIcon.src = icon.default;
     });
 
-    forecastIconDiv.classList.add("forecastIconDiv");
+    if (d === 0) {
+      dateDiv.textContent = "Tomorrow";
+    } else {
+      dateDiv.textContent = `${format(days[d + 1].datetime, "ccc, LLL d")}`;
+    }
+
+    dateDiv.classList.add("dateDiv");
+    forecastIcon.classList.add("forecastIcon");
     highLowDiv.classList.add("highLowDiv");
     highLowDiv.textContent = `${days[d + 1].tempmaxC}° / ${days[d + 1].tempminC}°`;
-    dayDivs[d].appendChild(forecastIconDiv);
+    dayDivs[d].appendChild(dateDiv);
+    dayDivs[d].appendChild(forecastIcon);
     dayDivs[d].appendChild(highLowDiv);
   }
+}
+
+export function drawLoading() {
+  const currentContainer = document.querySelector(".current-container");
+  currentContainer.textContent = "Loading ...";
 }
 
 export function drawWeather(weather) {

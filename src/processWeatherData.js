@@ -1,3 +1,4 @@
+import { parse } from "date-fns";
 // Grab resolvedAddress
 // Parse data into days array with needed data points. Six days in the array (today plus a five day forecast).
 // days[d]: conditions, datetime (or datetimeEpoch), description, feelslike, humidity, icon (dynamicImport()?), temp, tempmax, tempmin
@@ -14,7 +15,7 @@ function getSixDayArray(days) {
   for (let d = 0; d < 6; d++) {
     fiveDayArray[d] = {
       conditions: days[d].conditions,
-      datetime: days[d].datetime,
+      datetime: parse(days[d].datetime, "yyyy-MM-dd", new Date()),
       feelslikeC: Math.round(days[d].feelslike),
       feelslikeF: Math.round(celsiusToFahrenheit(days[d].feelslike)),
       icon: days[d].icon,

@@ -1,7 +1,7 @@
 import "./styles.css";
 import { getRawWeather } from "./getWeatherData.js";
 import { processWeather } from "./processWeatherData.js";
-import { drawWeather } from "./drawWeatherData.js";
+import { drawLoading, drawWeather } from "./drawWeatherData.js";
 
 // Weather app using Visual Crossing API
 // Get the current weather for a location, toggle between Celcius and Fahrenheit
@@ -11,10 +11,9 @@ import { drawWeather } from "./drawWeatherData.js";
 // API Key DZT5RXGHUH8KC87N2AGBG6S3Z
 
 async function reportWeather() {
-  console.log("loading...");
+  drawLoading();
   const weatherRaw = await getRawWeather();
   const weather = processWeather(weatherRaw);
-  console.log(weatherRaw);
   drawWeather(weather);
 }
 
