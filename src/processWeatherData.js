@@ -15,10 +15,8 @@ function getSixDayArray(days) {
     fiveDayArray[d] = {
       conditions: days[d].conditions,
       datetime: days[d].datetime,
-      description: days[d].description,
       feelslikeC: Math.round(days[d].feelslike),
       feelslikeF: Math.round(celsiusToFahrenheit(days[d].feelslike)),
-      humidity: days[d].humidity,
       icon: days[d].icon,
       tempC: Math.round(days[d].temp),
       tempF: Math.round(celsiusToFahrenheit(days[d].temp)),

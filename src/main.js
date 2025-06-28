@@ -14,6 +14,7 @@ async function reportWeather() {
   console.log("loading...");
   const weatherRaw = await getRawWeather();
   const weather = processWeather(weatherRaw);
+  console.log(weatherRaw);
   drawWeather(weather);
 }
 

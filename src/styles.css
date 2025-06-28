@@ -63,9 +63,20 @@ body {
 }
 
 .day {
-  border: 1px solid lightgray;
-  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   margin: 10px;
+  padding: 5px;
+}
+
+.forecastIcon {
+  margin: auto;
+  width: 30%;
+}
+
+.highLowDiv {
+  text-wrap: nowrap;
 }
 
 .search-container {

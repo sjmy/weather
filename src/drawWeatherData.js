@@ -1,9 +1,14 @@
 function clearContents() {
   const currentContainer = document.querySelector(".current-container");
   const titleContainer = document.querySelector(".title-container");
+  const dayDivs = document.querySelectorAll(".day");
 
   currentContainer.textContent = "";
   titleContainer.textContent = "";
+
+  for (let d = 0; d < dayDivs.length; d++) {
+    dayDivs[d].textContent = "";
+  }
 }
 
 function drawLocation(location) {
@@ -41,13 +46,28 @@ function drawCurrentWeather(today) {
   currentContainer.appendChild(currentConditionsDiv);
 }
 
-function drawCurrentWeatherDetails(today) {
-  const currentDetails = document.querySelector(".current-details");
+function drawFiveDayForecast(days) {
+  const dayDivs = document.querySelectorAll(".day");
+
+  for (let d = 0; d < dayDivs.length; d++) {
+    const forecastIconDiv = document.createElement("img");
+    const highLowDiv = document.createElement("div");
+
+    import(`./icons/${days[d + 1].icon}.svg`).then((icon) => {
+      forecastIconDiv.src = icon.default;
+    });
+
+    forecastIconDiv.classList.add("forecastIconDiv");
+    highLowDiv.classList.add("highLowDiv");
+    highLowDiv.textContent = `${days[d + 1].tempmaxC}° / ${days[d + 1].tempminC}°`;
+    dayDivs[d].appendChild(forecastIconDiv);
+    dayDivs[d].appendChild(highLowDiv);
+  }
 }
 
 export function drawWeather(weather) {
   clearContents();
   drawLocation(weather.location);
   drawCurrentWeather(weather.sixDayArray[0]);
-  drawCurrentWeatherDetails(weather.sixDayArray[0]);
+  drawFiveDayForecast(weather.sixDayArray);
 }
