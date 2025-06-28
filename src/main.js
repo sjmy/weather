@@ -1,6 +1,6 @@
 import "./styles.css";
-import { getWeather } from "./getWeatherData.js";
-import { processWeatherData } from "./processWeatherData.js";
+import { getRawWeather } from "./getWeatherData.js";
+import { processWeather } from "./processWeatherData.js";
 
 // Weather app using Visual Crossing API
 // Get the current weather for a location, toggle between Celcius and Fahrenheit
@@ -11,9 +11,11 @@ import { processWeatherData } from "./processWeatherData.js";
 
 async function reportWeather() {
   console.log("loading...");
-  const weatherData = await getWeather();
-  console.log(weatherData);
-  processWeatherData(weatherData);
+  const weatherRaw = await getRawWeather();
+  // console.log(weatherRaw);
+  const weather = processWeather(weatherRaw);
+  console.log(weather.location);
+  console.log(weather.sixDayArray);
 }
 
 function startEventListeners() {
@@ -31,4 +33,5 @@ function startEventListeners() {
   });
 }
 
+reportWeather();
 startEventListeners();

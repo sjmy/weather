@@ -1,4 +1,4 @@
-async function requestWeather(location) {
+async function requestRawWeather(location = "London") {
   try {
     const response = await fetch(
       `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&include=days&key=DZT5RXGHUH8KC87N2AGBG6S3Z&contentType=json`,
@@ -13,10 +13,14 @@ async function requestWeather(location) {
   }
 }
 
-function getLocation() {
-  return document.querySelector("#search").value;
+export function getRawLocation() {
+  const rawLocation = document.querySelector("#search").value;
+  if (rawLocation == "") {
+    return "London";
+  }
+  return rawLocation;
 }
 
-export function getWeather() {
-  return requestWeather(getLocation());
+export function getRawWeather() {
+  return requestRawWeather(getRawLocation());
 }

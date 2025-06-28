@@ -1,20 +1,49 @@
 // Grab resolvedAddress
-// Parse data into days array with needed data points. Five days in the array.
-// days[n]: conditions, datetime (or datetimeEpoch), description, feelslike, humidity, icon (dynamicImport()?), temp, tempmax, tempmin
+// Parse data into days array with needed data points. Six days in the array (today plus a five day forecast).
+// days[d]: conditions, datetime (or datetimeEpoch), description, feelslike, humidity, icon (dynamicImport()?), temp, tempmax, tempmin
 // days[0] is today
 
-// function createDaysArray() {
+function celsiusToFahrenheit(celsius) {
+  const fahrenheit = (celsius * 9) / 5 + 32;
+  return fahrenheit;
+}
 
-// }
+function getSixDayArray(days) {
+  let fiveDayArray = [];
 
-export function processWeatherData(weatherData) {
-  const location = weatherData.resolvedAddress;
-  const currentTemp = weatherData.days[0].temp;
-  const currentConditions = weatherData.days[0].conditions;
-  const currentHumidity = weatherData.days[0].humidity;
+  for (let d = 0; d < 6; d++) {
+    fiveDayArray[d] = {
+      conditions: days[d].conditions,
+      datetime: days[d].datetime,
+      description: days[d].description,
+      feelslikeC: days[d].feelslike,
+      feelslikeF: celsiusToFahrenheit(days[d].feelslike),
+      humidity: days[d].humidity,
+      icon: days[d].icon,
+      tempC: days[d].temp,
+      tempF: celsiusToFahrenheit(days[d].temp),
+      tempmaxC: days[d].tempmax,
+      tempmaxF: celsiusToFahrenheit(days[d].tempmax),
+      tempminC: days[d].tempmin,
+      tempminF: celsiusToFahrenheit(days[d].tempmin),
+    };
+  }
 
-  console.log(`Location: ${location}`);
-  console.log(`Current temp: ${currentTemp}`);
-  console.log(`Current conditions: ${currentConditions}`);
-  console.log(`Current humidity: ${currentHumidity}`);
+  return fiveDayArray;
+}
+
+function getResolvedLocation(weatherRaw) {
+  return weatherRaw.resolvedAddress;
+}
+
+export function processWeather(weatherRaw) {
+  const location = getResolvedLocation(weatherRaw);
+  const sixDayArray = getSixDayArray(weatherRaw.days);
+
+  // console.log(`Location: ${location}`);
+  // console.log(`Current temp: ${fiveDayArray[0].tempC} C`);
+  // console.log(`Current conditions: ${fiveDayArray[0].conditions}`);
+  // console.log(`Current humidity: ${fiveDayArray[0].humidity}`);
+
+  return { location, sixDayArray };
 }
